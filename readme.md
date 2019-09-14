@@ -2,30 +2,48 @@ Script I used to demo. I will clean this and use proper md syntax
 
 First Step
 ----------
-
+#### Check Flutter version
+```bash 
 flutter --version
+```
 
-Open simulator
-
+#### Open simulator
+```bash
 open -a Simulator
+```
 
+#### `flutter emulators --launch [DeviceID]`
+Starts up the emulator, installs and opens up your Flutter app.
+
+#### `flutter emulators`
+If you don't know the `DeviceID`, you can run this to get the list of your available emulators.
+
+#### `flutter run -d [DeviceID]`
+Starts the project on either an emulator or device. Depending on the specified `DeviceID`.
+
+#### `flutter run -d [DeviceID] --flavor=[flavor]`
+To run on Android with more that one build flavor, please specify `flavor`.
+
+#### `flutter devices`
+If you don't know the `DeviceID`, you can run this to get the list of your available devices that have already been started or connected to the computer.
+
+------
 
 Flutter is a toolset and a framework at the same time.
 
 Dartpad for learning basic of dart
 https://dartpad.dartlang.org/
 
-Sample if needed
+Sample if needed:
 
-class Person{
+```dart
+class Person {
   String name = 'sumith';
   int age = 30;
 }
 
-double addNumbers(double num1, double num2)
-{
-  return num1 + num2;
-}
+double addNumbers(double num1, double num2) { return num1 + num2; }
+
 void main() {
   
   for (int i = 0; i < 5; i++) {
@@ -42,17 +60,18 @@ void main() {
   double addnumberResult = addNumbers(2,3);
   print(addnumberResult);
 }
+```
 
 
-Slide 8
+## Slide 8
 
 Make sure its all working
 
+```bash 
 flutter doctor
 flutter create todo_app
-Flutter run
-
-
+flutter run
+```
 
 Show Dart devTools
 
@@ -63,11 +82,11 @@ Android Studio or VSCode
 
 All good lets work on the Todo app.
 
-
-For that we need a task_list
+For that we need a `task_list`
 
 To start with lets create a model
 
+```dart 
 class Task {
   String name, details;
   bool completed = false;
@@ -81,15 +100,15 @@ class Task {
 
   static List<Task> get tasks => _tasks;
 
-  Task(this.name, this.details);
+  Task(this.name, this.details);  // Constructor with parameters for creating a Task object
 }
+```
 
+Lets delete every thing in `main.dart`
+`main.dart` is the starting point
+Talk about the main function -> is the entry point
 
-Lets delete every thing in main.dart
-Main.dart is the starting point
-Talk about the main function-> is the entry point
-
-
+```dart
 import 'package:flutter/material.dart';
 import 'task_list_view.dart';
 
@@ -117,12 +136,13 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+```
 
+So the home points to `TaskListView`, lets create a `task_list_view.dart`
 
-
-So the home points to TaskListView, lets create a task_list_view.dart
 Talk about scaffold
 
+```dart
 import 'package:flutter/material.dart';
 
 import 'model.dart';
@@ -152,23 +172,27 @@ class TaskListView extends StatelessWidget {
     );
   }
 }
+```
 
-We are using a for loop so modify pubspec.yaml 
+We are using a for loop so modify `pubspec.yaml`
 
+```yaml
 sdk: ">=2.2.2 <3.0.0"
+```
+
 
 Talk about hotreload, and restart 
-
 
 Now you got the checkbox, lets see if we can reflect these toggle in code
 Talk about stateful vs stateless widgets
 
-In task_list_view.dart
+In `task_list_view.dart`
 
-Change onPressed: () => toggleTask(task),
+Change `onPressed: () => toggleTask(task),`
 
 Change the class  extend to StatefulWidget
 
+```dart
 @override
   _TaskListViewState createState() => _TaskListViewState();
 }
@@ -179,7 +203,11 @@ class _TaskListViewState extends State<TaskListView> {
       task.completed = !task.completed;
     });
   }
-
+  
+  ...
+  
+}
+ ```
 
 ------------------------  thats pretty easy and awesome check if its break time-----------------
 
@@ -188,6 +216,7 @@ This looks like a long list would be nice if we can seperate our list to the one
 
 We extract the list in its own list tile widget 
 
+```dart
 Widget _listTile(Task task) {
     return ListTile(
       leading: IconButton(
@@ -200,23 +229,27 @@ Widget _listTile(Task task) {
       subtitle: (task.details != null) ? Text(task.details) : null,
     );
   }
+```
 
 
- for (final task in Task.tasks) _listTile(task),
+`for (final task in Task.tasks) _listTile(task),
 
 
 Lets modify the model "model.dart" and add method to ... Not the best practice, les make it work.
 
+```dart
 static List<Task> get currentTasks =>
       _tasks.where((task) => !task.completed).toList();
 
-  static List<Task> get completedTasks =>
+static List<Task> get completedTasks =>
       _tasks.where((task) => task.completed).toList();
-
+```
 
 
 Now we seperate the current task and completed tasks in the list view
 
+```dart
+for (final task in Task.currentTasks) _listTile(task),
 for (final task in Task.currentTasks) _listTile(task),
           Divider(),
           ExpansionTile(
@@ -227,12 +260,12 @@ for (final task in Task.currentTasks) _listTile(task),
             ],
           )
         ],
-
+```
 
 ---------------- So we would like to add some tasks to the list --------------
-Lets create a new dart file add_task_dialog.dart -> stateful widget, I will copy some code and explain as i go along.....
+Lets create a new dart file `add_task_dialog.dart` -> stateful widget, I will copy some code and explain as i go along.....
 
-
+```dart
 import 'package:flutter/material.dart';
 
 import 'model.dart';
@@ -293,11 +326,11 @@ class _TaskDialogState extends State<TaskDialog> {
     );
   }
 }
+```
 
+We modify our `task_list` add a floating action button
 
-
-We modify our task_list add a floating action button
-
+```dart
 floatingActionButton: FloatingActionButton(
         onPressed: _addTask,
       ),
@@ -311,12 +344,13 @@ void _addTask() {
       ),
     );
   }
+```
 
-Lets also change toggleTask to be private for consistency _toggleTask
-
+Lets also change `toggleTask` to be private for consistency `_toggleTask`
 
 We can navigate from tasklist to add task dialog, finally lets add a button to save.
 
+```dart
 actions: <Widget>[
           FlatButton(
             child: Text(
@@ -327,11 +361,11 @@ actions: <Widget>[
           ),
         ],
       ),
-
+```
 
 When save returns we have to wait for the dialog as it returns task. So lets change the _add task to async and save it to the list
 
-
+```dart
 void _addTask() async {
     final task = await Navigator.push(
       context,
@@ -347,26 +381,30 @@ void _addTask() async {
       });
     }
   }
+```
+--------- finally if we have time lets look at theming and delete
 
---------- finally if w have time lets look at theming and delete
+In `main.dart`
+We see `theme:` , lets add the dark theme
 
-In main.dart
-We see theme , lets add the dark theme
+```dart
 theme: ThemeData.dark(),
+```
 
 --------
 Delete task -> we can play with platform specific dialogs here
 
-
 Lets add an trailing ICON
+
+```dart
 subtitle: (task.details != null) ? Text(task.details) : null,
       trailing: IconButton(
         icon: Icon(Icons.delete_forever),
         onPressed: () => _deleteTask(task),
       ),
+```
 
-
-
+```dart
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -424,14 +462,15 @@ void _deleteTask(Task task) async {
       });
     }
   }
+```
 
 
+For consistency lets change floating button to:
 
-For consistency lets change floating button to
+```dart
+For consistency lets change floating button to:
 floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: _addTask,
       ),
-
-
-
+```
