@@ -1,4 +1,15 @@
 Script I used to demo. I will clean this and use proper md syntax
+1.
+Make sure its setup
+macOS Setup Guide: https://flutter.io/setup-macos
+Windows Setup Guide: https://flutter.io/setup-windows
+Linux Setup Guide: https://flutter.io/setup-linux
+Visual Studio Code: https://code.visualstudio.com/
+Visual Studio Code Flutter Extension: https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter
+Android Studio: https://developer.android.com/studio/
+
+Link to my slides
+https://docs.google.com/presentation/d/1aVgw9A3iANDIWVz8O5HF4vmqpMO9IB-8Ok75k32s1u0/edit?usp=sharing
 
 First Step
 ----------
