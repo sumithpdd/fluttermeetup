@@ -272,6 +272,8 @@ for (final task in Task.currentTasks) _listTile(task),
           )
         ],
 ```
+class _TaskListViewState extends State<TaskListView> {
+  final GlobalKey<State> _completedKey = GlobalKey<State>();
 
 ---------------- So we would like to add some tasks to the list --------------
 Lets create a new dart file `add_task_dialog.dart` -> stateful widget, I will copy some code and explain as i go along.....
