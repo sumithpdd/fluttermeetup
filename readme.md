@@ -291,7 +291,7 @@ class AddTaskDialog extends StatefulWidget {
   _TaskDialogState createState() => _TaskDialogState();
 }
 
-class _TaskDialogState extends State<TaskDialog> {
+class _TaskDialogState extends State<AddTaskDialog> {
   String _taskName = '';
   String _taskDetails;
 
