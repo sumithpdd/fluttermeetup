@@ -94,8 +94,8 @@ Android Studio or VSCode
 All good lets work on the Todo app.
 
 For that we need a `task_list`
-
-To start with lets create a model
+create a folder model
+To start with lets create a model name it task.dart
 
 ```dart 
 class Task {
@@ -156,7 +156,7 @@ Talk about scaffold
 ```dart
 import 'package:flutter/material.dart';
 
-import 'model.dart';
+import 'model/task.dart';
 
 class TaskListView extends StatelessWidget {
   @override
