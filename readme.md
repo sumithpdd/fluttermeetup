@@ -9,7 +9,7 @@ Visual Studio Code Flutter Extension: https://marketplace.visualstudio.com/items
 Android Studio: https://developer.android.com/studio/
 
 Link to my slides
-https://docs.google.com/presentation/d/1aVgw9A3iANDIWVz8O5HF4vmqpMO9IB-8Ok75k32s1u0/edit?usp=sharing
+https://docs.google.com/presentation/d/1PEAaLvDouDzg-k8SSQl8EfdqwrUVkiwb6GXT3M7wlOg/edit?usp=sharing
 
 First Step
 ----------
@@ -74,7 +74,7 @@ void main() {
 ```
 
 
-## Slide 8
+## Slide 28
 
 Make sure its all working
 
